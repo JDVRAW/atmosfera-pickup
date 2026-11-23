@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Atmosfera brand: plum, shell, rose, peach. Sunrise gradient runs rose to peach. */
+@theme {
+  --color-plum: #2a1b3d;
+  --color-plum-soft: #4a3a5e;
+  --color-shell: #fff4ec;
+  --color-shell-deep: #fbe6d8;
+  --color-rose: #e8577e;
+  --color-rose-dark: #c93d64;
+  --color-peach: #ffb38a;
 }
 
+/* Inline so the next/font variables resolve on the element that uses them. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-unbounded), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-shell);
+  color: var(--color-plum);
+}
+
+.bg-sunrise {
+  background-image: linear-gradient(180deg, var(--color-rose), var(--color-peach));
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-rose);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
