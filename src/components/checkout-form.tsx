@@ -156,13 +156,13 @@ export function CheckoutForm({
     }
   }
 
-  if (!ready) return <div className="mt-8 h-40 animate-pulse rounded-2xl bg-white/60" />;
+  if (!ready) return <div className="mt-8 h-40 animate-pulse rounded-2xl bg-shell/5" />;
 
   if (lines.length === 0) {
     return (
-      <div className="mt-8 rounded-2xl bg-white p-8 text-center">
-        <p className="text-plum-soft">Your bag is empty.</p>
-        <Link href="/" className="mt-4 inline-block rounded-full bg-rose px-6 py-3 font-semibold text-white hover:bg-rose-dark">
+      <div className="mt-8 rounded-2xl bg-shell/5 p-8 text-center">
+        <p className="text-shell/75">Your bag is empty.</p>
+        <Link href="/" className="mt-4 inline-block rounded-full bg-rose px-6 py-3 font-bold text-plum hover:bg-peach">
           Browse the menu
         </Link>
       </div>
@@ -177,18 +177,18 @@ export function CheckoutForm({
         void pay();
       }}
     >
-      <section className="rounded-2xl bg-white p-4">
-        <ul className="divide-y divide-plum/10">
+      <section className="rounded-2xl bg-shell/5 p-4">
+        <ul className="divide-y divide-shell/10">
           {lines.map((l) => (
             <li key={l.key} className="flex gap-3 py-3">
               <div className="min-w-0 flex-1">
                 <p className="font-semibold">
                   {l.itemName}
-                  {l.variationName && l.variationName !== "Regular" && <span className="font-normal text-plum-soft"> · {l.variationName}</span>}
+                  {l.variationName && l.variationName !== "Regular" && <span className="font-normal text-shell/75"> · {l.variationName}</span>}
                 </p>
-                {l.modifiers.length > 0 && <p className="text-sm text-plum-soft">{l.modifiers.map((m) => m.name).join(", ")}</p>}
-                {l.note && <p className="text-sm italic text-plum-soft">“{l.note}”</p>}
-                <div className="mt-2 inline-flex items-center rounded-full border border-plum/15">
+                {l.modifiers.length > 0 && <p className="text-sm text-shell/75">{l.modifiers.map((m) => m.name).join(", ")}</p>}
+                {l.note && <p className="text-sm italic text-shell/75">“{l.note}”</p>}
+                <div className="mt-2 inline-flex items-center rounded-full border border-shell/15">
                   <button type="button" className="h-8 w-8" onClick={() => setQuantity(l.key, l.quantity - 1)} aria-label={`Remove one ${l.itemName}`}>
                     −
                   </button>
@@ -202,19 +202,19 @@ export function CheckoutForm({
             </li>
           ))}
         </ul>
-        <Link href="/" className="mt-2 inline-block text-sm font-semibold text-rose-dark hover:underline">
+        <Link href="/" className="mt-2 inline-block text-sm font-bold text-peach hover:text-shell">
           + Add more
         </Link>
       </section>
 
-      <section className="rounded-2xl bg-white p-4">
+      <section className="rounded-2xl bg-shell/5 p-4">
         <h2 className="font-display text-lg font-medium">Pickup time</h2>
         <div className="mt-3 grid grid-cols-2 gap-2">
           <Choice on={pickup === "ASAP"} onClick={() => setPickup("ASAP")}>
             As soon as possible
-            <span className="block text-xs font-normal text-plum-soft">About {PREP_MINUTES} minutes</span>
+            <span className="block text-xs font-normal text-shell/75">About {PREP_MINUTES} minutes</span>
           </Choice>
-          <label className={`rounded-xl border-2 px-3 py-2 ${pickup !== "ASAP" ? "border-rose" : "border-plum/10"}`}>
+          <label className={`rounded-xl border-2 px-3 py-2 ${pickup !== "ASAP" ? "border-rose" : "border-shell/10"}`}>
             <span className="block text-sm font-semibold">Later today</span>
             <select
               value={pickup === "ASAP" ? "" : pickup}
@@ -234,7 +234,7 @@ export function CheckoutForm({
         </div>
       </section>
 
-      <section className="rounded-2xl bg-white p-4">
+      <section className="rounded-2xl bg-shell/5 p-4">
         <h2 className="font-display text-lg font-medium">Your details</h2>
         <div className="mt-3 grid gap-3">
           <Field label="Name for the order" value={name} onChange={setName} autoComplete="given-name" required />
@@ -244,9 +244,9 @@ export function CheckoutForm({
         </div>
       </section>
 
-      <section className="rounded-2xl bg-white p-4">
+      <section className="rounded-2xl bg-shell/5 p-4">
         <h2 className="font-display text-lg font-medium">Add a tip</h2>
-        <p className="text-sm text-plum-soft">100% goes to the team.</p>
+        <p className="text-sm text-shell/75">100% goes to the team.</p>
         <div className="mt-3 grid grid-cols-5 gap-2">
           <Choice compact on={tip.kind === "none"} onClick={() => setTip({ kind: "none" })}>
             None
@@ -273,30 +273,30 @@ export function CheckoutForm({
                 setTip({ kind: "custom", cents: Number.isFinite(cents) ? Math.min(cents, 100_00) : 0 });
               }}
               placeholder="0.00"
-              className="w-28 rounded-lg border border-plum/15 px-3 py-2"
+              className="w-28 rounded-lg border border-shell/15 bg-shell/5 px-3 py-2"
               aria-label="Custom tip in dollars"
             />
           </label>
         )}
       </section>
 
-      <section className="rounded-2xl bg-white p-4">
+      <section className="rounded-2xl bg-shell/5 p-4">
         <dl className="space-y-1 text-sm">
           <Row label="Subtotal" value={formatCents(subtotal)} />
           <Row label="Tax" value={quote ? formatCents(quote.taxCents) : "…"} />
           <Row label="Tip" value={formatCents(tipCents)} />
-          <div className="flex justify-between border-t border-plum/10 pt-2 text-base font-bold">
+          <div className="flex justify-between border-t border-shell/10 pt-2 text-base font-bold">
             <dt>Total</dt>
             <dd>{formatCents(total)}</dd>
           </div>
         </dl>
-        {quoteError && <p className="mt-2 text-sm font-semibold text-rose-dark">{quoteError}</p>}
+        {quoteError && <p className="mt-2 text-sm font-semibold text-rose-light">{quoteError}</p>}
       </section>
 
-      <section className="rounded-2xl bg-white p-4">
+      <section className="rounded-2xl bg-shell/5 p-4">
         <h2 className="font-display mb-3 text-lg font-medium">Payment</h2>
         {demo ? (
-          <p className="rounded-xl bg-shell-deep p-3 text-sm">
+          <p className="rounded-xl bg-shell/10 p-3 text-sm">
             Preview mode: no card is charged. Once Square is connected, the card, Apple Pay and Google Pay form appears here.
           </p>
         ) : (
@@ -318,7 +318,7 @@ export function CheckoutForm({
       </section>
 
       {error && (
-        <p role="alert" className="rounded-xl bg-rose/10 p-3 text-sm font-semibold text-rose-dark">
+        <p role="alert" className="rounded-xl bg-rose/15 p-3 text-sm font-semibold text-rose-light">
           {error}
         </p>
       )}
@@ -326,7 +326,7 @@ export function CheckoutForm({
       <button
         type="submit"
         disabled={busy || !openNow}
-        className="flex h-14 w-full items-center justify-between rounded-full bg-rose px-6 text-lg font-semibold text-white shadow-lg shadow-rose/30 transition hover:bg-rose-dark disabled:opacity-60"
+        className="flex h-14 w-full items-center justify-between rounded-[18px] bg-sunrise-x px-6 text-lg font-extrabold text-plum shadow-lg shadow-black/30 transition hover:brightness-105 disabled:opacity-60"
       >
         <span>{busy ? "Placing order…" : openNow ? "Place order" : "Ordering paused"}</span>
         <span>{formatCents(total)}</span>
@@ -342,7 +342,7 @@ function Choice({ on, onClick, children, compact }: { on: boolean; onClick: () =
       aria-pressed={on}
       onClick={onClick}
       className={`rounded-xl border-2 text-left font-semibold transition ${compact ? "px-1 py-2 text-center text-sm" : "px-3 py-2 text-sm"} ${
-        on ? "border-rose bg-rose/5" : "border-plum/10 hover:border-plum/30"
+        on ? "border-rose bg-rose/15" : "border-shell/10 hover:border-shell/30"
       }`}
     >
       {children}
@@ -370,14 +370,14 @@ function Field({
   return (
     <label className="block">
       <span className="text-sm font-semibold">{label}</span>
-      {hint && <span className="ml-2 text-xs text-plum-soft">{hint}</span>}
+      {hint && <span className="ml-2 text-xs text-shell/75">{hint}</span>}
       <input
         type={type}
         value={value}
         required={required}
         autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-xl border border-plum/15 bg-white px-4 py-3"
+        className="mt-1 w-full rounded-xl border border-shell/15 bg-shell/5 px-4 py-3"
       />
     </label>
   );
@@ -386,7 +386,7 @@ function Field({
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between">
-      <dt className="text-plum-soft">{label}</dt>
+      <dt className="text-shell/75">{label}</dt>
       <dd>{value}</dd>
     </div>
   );
