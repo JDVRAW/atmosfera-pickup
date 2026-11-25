@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Order ahead for pickup at Atmosfera Cafe.",
     start_url: "/",
     display: "standalone",
-    background_color: "#FFF4EC",
+    background_color: "#2A1B3D",
     theme_color: "#2A1B3D",
     icons: [
       { src: "/brand/atmosfera-app-icon-192.png", sizes: "192x192", type: "image/png" },

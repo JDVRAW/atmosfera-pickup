@@ -142,11 +142,11 @@ export function SquarePay({
             className={googlePay ? "h-12 overflow-hidden rounded-xl" : "hidden"}
             aria-disabled={disabled}
           />
-          <p className="text-center text-xs text-plum-soft">or pay with card</p>
+          <p className="text-center text-xs text-shell/75">or pay with card</p>
         </div>
       )}
-      <div id="sq-card" className="min-h-[90px]" />
-      {error && <p className="mt-2 text-sm font-semibold text-rose-dark">{error}</p>}
+      <div id="sq-card" className="min-h-[90px] rounded-xl bg-shell p-2 text-plum" />
+      {error && <p className="mt-2 text-sm font-semibold text-rose-light">{error}</p>}
     </div>
   );
 }

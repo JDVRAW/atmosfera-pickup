@@ -5,22 +5,26 @@ import { useCart } from "./cart";
 
 export function Header({ showCart = true }: { showCart?: boolean }) {
   const { count, ready } = useCart();
+  const label = ready && count > 0 ? `Bag, ${count} ${count === 1 ? "item" : "items"}` : "Bag";
   return (
-    <header className="sticky top-0 z-30 border-b border-plum/10 bg-shell/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
+    <header className="sticky top-0 z-30 bg-plum/95 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-5">
         <Link href="/" aria-label="Atmosfera Cafe, back to menu" className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/atmosfera-logo-on-light.svg" alt="Atmosfera Cafe" className="h-10 w-auto" />
+          <img src="/brand/atmosfera-logo-on-dark.svg" alt="Atmosfera Cafe" className="h-[34px] w-auto" />
         </Link>
         {showCart && (
           <Link
             href="/checkout"
-            className="relative flex items-center gap-2 rounded-full bg-plum px-4 py-2 text-sm font-semibold text-shell transition hover:bg-plum-soft"
+            aria-label={label}
+            className="relative grid h-11 w-11 place-items-center rounded-full bg-shell/10 text-shell transition hover:bg-shell/20"
           >
-            <BagIcon />
-            <span>Bag</span>
+            <BagIcon className="h-5 w-5" />
             {ready && count > 0 && (
-              <span className="grid h-5 min-w-5 place-items-center rounded-full bg-rose px-1 text-xs text-white" aria-label={`${count} items`}>
+              <span
+                aria-hidden
+                className="absolute -right-0.5 -top-0.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-rose px-1 text-[11px] font-extrabold text-white"
+              >
                 {count}
               </span>
             )}

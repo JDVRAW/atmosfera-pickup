@@ -9,6 +9,9 @@
   --color-rose: #e8577e;
   --color-rose-dark: #c93d64;
   --color-peach: #ffb38a;
+  --color-plum-raised: #36264b;
+  /* Lighter rose for error text on the plum background (about 7:1 contrast). */
+  --color-rose-light: #ff8fab;
 }
 
 /* Inline so the next/font variables resolve on the element that uses them. */
@@ -17,21 +20,35 @@
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Night shift: the whole app sits on plum with shell text. */
 html {
   -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
+  background: var(--color-plum);
 }
 
 body {
-  background: var(--color-shell);
-  color: var(--color-plum);
+  background: var(--color-plum);
+  color: var(--color-shell);
 }
 
 .bg-sunrise {
   background-image: linear-gradient(180deg, var(--color-rose), var(--color-peach));
 }
 
+.bg-sunrise-x {
+  background-image: linear-gradient(90deg, var(--color-rose), var(--color-peach));
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 :focus-visible {
-  outline: 3px solid var(--color-rose);
+  outline: 3px solid var(--color-peach);
   outline-offset: 2px;
 }
 

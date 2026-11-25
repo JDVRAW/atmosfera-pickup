@@ -39,18 +39,18 @@ export default async function OrderPage({
     <>
       <Header />
       <main className="mx-auto max-w-xl px-4 pb-24 pt-6">
-        <section className="bg-sunrise rounded-3xl px-6 py-10 text-center">
+        <section className="bg-sunrise rounded-3xl px-6 py-10 text-center text-plum">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/atmosfera-mark-on-light.svg" alt="" aria-hidden className="mx-auto h-20 w-20 mix-blend-multiply" />
           <h1 className="font-display mt-4 text-2xl font-medium">Thanks{name ? `, ${name}` : ""}!</h1>
           <p className="mt-2 text-plum/80">Your order is in. {when}</p>
-          {order && <p className="mt-4 inline-block rounded-full bg-white/70 px-4 py-1 text-sm font-semibold">{STATUS[order.state] ?? "Received."}</p>}
+          {order && <p className="mt-4 inline-block rounded-full bg-plum px-4 py-1.5 text-sm font-bold text-shell">{STATUS[order.state] ?? "Received."}</p>}
         </section>
 
-        <section className="mt-6 rounded-2xl bg-white p-5">
+        <section className="mt-6 rounded-2xl bg-shell/5 p-5">
           <h2 className="font-display text-lg font-medium">Order details</h2>
           {order ? (
-            <ul className="mt-3 divide-y divide-plum/10 text-sm">
+            <ul className="mt-3 divide-y divide-shell/10 text-sm">
               {order.lines.map((l, i) => (
                 <li key={i} className="flex justify-between py-2">
                   <span>
@@ -61,26 +61,26 @@ export default async function OrderPage({
               ))}
             </ul>
           ) : (
-            <p className="mt-2 text-sm text-plum-soft">Order number {id}</p>
+            <p className="mt-2 text-sm text-shell/75">Order number {id}</p>
           )}
           {totalCents != null && (
-            <p className="mt-3 flex justify-between border-t border-plum/10 pt-3 font-bold">
+            <p className="mt-3 flex justify-between border-t border-shell/10 pt-3 font-bold">
               <span>Total paid</span>
               <span>{formatCents(totalCents)}</span>
             </p>
           )}
           {q.receipt && /^https:\/\/(squareup|squareupsandbox)\.com\//.test(q.receipt) && (
-            <a href={q.receipt} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-semibold text-rose-dark hover:underline">
+            <a href={q.receipt} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-bold text-peach hover:text-shell">
               View your receipt
             </a>
           )}
         </section>
 
-        <p className="mt-6 text-center text-sm text-plum-soft">
+        <p className="mt-6 text-center text-sm text-shell/75">
           Head to the pickup counter and give the name on your order{shop.address ? ` at ${shop.address}` : ""}.
         </p>
         <div className="mt-4 text-center">
-          <Link href="/" className="font-semibold text-rose-dark hover:underline">
+          <Link href="/" className="inline-block rounded-full bg-shell/10 px-6 py-3 font-bold text-shell hover:bg-shell/20">
             Back to the menu
           </Link>
         </div>
